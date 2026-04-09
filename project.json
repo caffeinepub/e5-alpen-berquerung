@@ -1,0 +1,22 @@
+{
+  "overview": "A hiking diary website for the E5 alpine crossing from Oberstdorf to Meran in August 2026. Features a beautiful rustic alpine design with 12 clickable stage cards showing the complete route.",
+  "features": [
+    "12-stage route overview with clickable cards",
+    "Rustic alpine design with warm browns and wood texture",
+    "Mobile-first responsive grid layout",
+    "Stage details: number, date, and route name",
+    "Ready for future diary entries and photos per stage"
+  ],
+  "category": "travel",
+  "tags": [
+    "hiking",
+    "travel",
+    "diary",
+    "alps",
+    "e5",
+    "germany",
+    "austria",
+    "italy"
+  ],
+  "last_updated": "2026-04-08T22:49:37.591Z"
+}

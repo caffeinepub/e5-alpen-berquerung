@@ -1,0 +1,54 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type StagePhoto = 
+ record {
+   blobHash: text;
+   description: text;
+   distanceKm: opt float64;
+   id: text;
+   stageId: nat;
+   timestamp: int;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initializeAccessControl: () -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  deleteStagePhoto: (photoId: text) -> (variant {
+                                          err: text;
+                                          ok;
+                                        });
+  getCallerUserRole: () -> (UserRole) query;
+  getStagePhotos: (stageId: nat) -> (vec StagePhoto) query;
+  isCallerAdmin: () -> (bool) query;
+  uploadStagePhoto: (stageId: nat, description: text, blobHash: text,
+   distanceKm: opt float64) -> (variant {
+                                  err: text;
+                                  ok: StagePhoto;
+                                });
+  whoami: () -> (principal) query;
+}
